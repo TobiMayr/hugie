@@ -25,6 +25,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView serverStatus;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Button connectPhones;
 
     private Button copyButton;
+    private Button pasteButton;
 
     private String serverIpAddress = "";
 
@@ -71,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 CopyIp();
             }
         });
+        pasteButton = (Button) findViewById(R.id.paste_button);
+        pasteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                PasteIp();
+            }
+        });
     }
 
     public void CopyIp(){
@@ -78,6 +87,30 @@ public class MainActivity extends AppCompatActivity {
         ClipData clip = ClipData.newPlainText("ServerIP", SERVERIP);
 
         clipboard.setPrimaryClip(clip);
+    }
+
+    public void PasteIp(){
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+
+        String pasteData = "";
+
+        if (!(clipboard.hasPrimaryClip())) {
+
+        } else if (!(clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN))) {
+
+            // since the clipboard has data but it is not plain text
+
+        } else {
+
+            //since the clipboard contains plain text.
+            ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+
+            // Gets the clipboard as text.
+            pasteData = item.getText().toString();
+
+        }
+        serverIp.setText(pasteData);
+
     }
 
 

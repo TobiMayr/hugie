@@ -25,6 +25,12 @@
         android:id="@+id/server_ip" />
 
     <Button
+        android:text="Paste IP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/paste_button" />
+
+    <Button
         android:text="Connect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
