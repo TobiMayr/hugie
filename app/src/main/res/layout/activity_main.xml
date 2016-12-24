@@ -9,16 +9,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/server_status" />
+
+    <Button
+        android:text="Copy IP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/copy_button" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text=""
         android:ems="10"
         android:id="@+id/server_ip" />
 
     <Button
-        android:text="Button"
+        android:text="Connect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/connect_phones" />

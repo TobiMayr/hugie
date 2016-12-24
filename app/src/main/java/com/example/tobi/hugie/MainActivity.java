@@ -1,5 +1,8 @@
 package com.example.tobi.hugie;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button connectPhones;
 
+    private Button copyButton;
+
     private String serverIpAddress = "";
 
     private boolean connected = false;
@@ -60,8 +65,20 @@ public class MainActivity extends AppCompatActivity {
         serverIp = (EditText) findViewById(R.id.server_ip);
         connectPhones = (Button) findViewById(R.id.connect_phones);
         connectPhones.setOnClickListener(connectListener);
+        copyButton = (Button) findViewById(R.id.copy_button);
+        copyButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CopyIp();
+            }
+        });
     }
 
+    public void CopyIp(){
+        ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("ServerIP", SERVERIP);
+
+        clipboard.setPrimaryClip(clip);
+    }
 
 
     public class ServerThread implements Runnable {
