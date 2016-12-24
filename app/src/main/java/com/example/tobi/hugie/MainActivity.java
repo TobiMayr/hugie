@@ -4,12 +4,14 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Handler;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     // DESIGNATE A PORT
     public static final int SERVERPORT = 8080;
 
-    private Handler handler1 = new Handler();
+    private Handler handler = new Handler();
 
     private ServerSocket serverSocket;
 
@@ -47,12 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
     private Button copyButton;
     private Button pasteButton;
+    private Button sendButton;
+    private ImageView hugImage;
 
     private String serverIpAddress = "";
 
     private boolean connected = false;
 
-    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
                 PasteIp();
             }
         });
+        hugImage = (ImageView) findViewById(R.id.hug_image);
+        sendButton = (Button) findViewById(R.id.send_button);
+        sendButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                hugImage.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     public void CopyIp(){
@@ -102,15 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
 
-            //since the clipboard contains plain text.
             ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
-
-            // Gets the clipboard as text.
             pasteData = item.getText().toString();
-
         }
         serverIp.setText(pasteData);
-
     }
 
 
@@ -119,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             try {
                 if (SERVERIP != null) {
-                    handler1.post(new Runnable() {
+                    handler.post(new Runnable() {
                         @Override
                         public void run() {
                             serverStatus.setText("Listening on IP: " + SERVERIP);
@@ -129,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                     while (true) {
                         // LISTEN FOR INCOMING CLIENTS
                         Socket client = serverSocket.accept();
-                        handler1.post(new Runnable() {
+                        handler.post(new Runnable() {
                             @Override
                             public void run() {
                                 serverStatus.setText("Connected.");
@@ -141,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                             String line = null;
                             while ((line = in.readLine()) != null) {
                                 Log.d("ServerActivity", line);
-                                handler1.post(new Runnable() {
+                                handler.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         // DO WHATEVER YOU WANT TO THE FRONT END
@@ -151,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             break;
                         } catch (Exception e) {
-                            handler1.post(new Runnable() {
+                            handler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     serverStatus.setText("Oops. Connection interrupted. Please reconnect your phones.");
@@ -161,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    handler1.post(new Runnable() {
+                    handler.post(new Runnable() {
                         @Override
                         public void run() {
                             serverStatus.setText("Couldn't detect internet connection.");
@@ -169,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             } catch (Exception e) {
-                handler1.post(new Runnable() {
+                handler.post(new Runnable() {
                     @Override
                     public void run() {
                         serverStatus.setText("Error");
@@ -251,5 +256,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 }
