@@ -85,11 +85,11 @@ public class MainActivity extends AppCompatActivity {
         });
         hugImage = (ImageView) findViewById(R.id.hug_image);
         sendButton = (Button) findViewById(R.id.send_button);
-        sendButton.setOnClickListener(new View.OnClickListener(){
+        /*sendButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 hugImage.setVisibility(View.VISIBLE);
             }
-        });
+        });*/
     }
 
     public void CopyIp(){
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            serverStatus.setText("Listening on IP: " + SERVERIP);
+                            serverStatus.setText(getString(R.string.status) + SERVERIP);
                         }
                     });
                     serverSocket = new ServerSocket(SERVERPORT);
@@ -137,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                serverStatus.setText("Connected.");
+                                serverStatus.setText(R.string.connected);
+                                hugImage.setVisibility(View.VISIBLE);
                             }
                         });
 
