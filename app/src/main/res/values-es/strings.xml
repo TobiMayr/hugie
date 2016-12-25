@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="connected">Conectado.</string>
-    <string name="status">"Escuchando IP: "</string>
+    <string name="connected">Conectado. Vos puedes recibier</string>
+    <string name="status">"Escuchando en IP: "</string>
     <string name="copied_ip">IP copiada</string>
     <string name="nothing_clipboard">Nada para pegar</string>
     <string name="no_text_clipboard">Ningún texto para pegar</string>
     <string name="pasted_ip">IP pegada</string>
+    <string name="copy_ip">Copiar IP</string>
+    <string name="paste_ip">Pegar IP</string>
+    <string name="connect">Conectar</string>
+    <string name="send">Enviar</string>
 </resources>

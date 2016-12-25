@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private Button pasteButton;
     private Button sendButton;
     private ImageView hugImage;
+    private TextView deviceServerIp;
 
     private String serverIpAddress = "";
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         Thread fst = new Thread(new ServerThread());
         fst.start();
-
+        deviceServerIp = (TextView) findViewById(R.id.device_server_ip);
         serverIp = (EditText) findViewById(R.id.server_ip);
         connectPhones = (Button) findViewById(R.id.connect_phones);
         connectPhones.setOnClickListener(connectListener);
@@ -135,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            serverStatus.setText(getString(R.string.status) + SERVERIP);
+                            serverStatus.setText(getString(R.string.status));
+                            deviceServerIp.setText(SERVERIP);
                         }
                     });
                     serverSocket = new ServerSocket(SERVERPORT);
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 serverStatus.setText(R.string.connected);
-                                hugImage.setVisibility(View.VISIBLE);
+
                             }
                         });
 
@@ -160,7 +162,8 @@ public class MainActivity extends AppCompatActivity {
                                     public void run() {
                                         // DO WHATEVER YOU WANT TO THE FRONT END
                                         // THIS IS WHERE YOU CAN BE CREATIVE
-                                    }
+                                        hugImage.setVisibility(View.VISIBLE);
+                                                                                }
                                 });
                             }
                             break;
@@ -223,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Cliet side
     private View.OnClickListener connectListener = new View.OnClickListener() {
 
         @Override
