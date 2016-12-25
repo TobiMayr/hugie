@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -95,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
     public void CopyIp(){
         ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("ServerIP", SERVERIP);
-
         clipboard.setPrimaryClip(clip);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.copied_ip, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void PasteIp(){
@@ -105,15 +107,21 @@ public class MainActivity extends AppCompatActivity {
         String pasteData = "";
 
         if (!(clipboard.hasPrimaryClip())) {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.nothing_clipboard, Toast.LENGTH_SHORT);
+            toast.show();
 
         } else if (!(clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN))) {
 
-            // since the clipboard has data but it is not plain text
+            // since the clipboard has data but it is not plain
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.no_text_clipboard, Toast.LENGTH_SHORT);
+            toast.show();
 
         } else {
 
             ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
             pasteData = item.getText().toString();
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.pasted_ip, Toast.LENGTH_SHORT);
+            toast.show();
         }
         serverIp.setText(pasteData);
     }

@@ -2,4 +2,8 @@
     <string name="app_name">Hugie</string>
     <string name="connected">Connected.</string>
     <string name="status">"Listening on IP: "</string>
+    <string name="copied_ip">Copied IP</string>
+    <string name="nothing_clipboard">Nothing to paste</string>
+    <string name="no_text_clipboard">No text to paste</string>
+    <string name="pasted_ip">Pasted IP</string>
 </resources>
