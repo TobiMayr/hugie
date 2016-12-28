@@ -5,6 +5,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"
+        />
+
     <TextView
         android:text="No status"
         android:layout_width="match_parent"
@@ -83,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text=""
-                android:ems="10"
+                android:ems="12"
                 android:id="@+id/server_ip"
                 android:layout_weight="0"/>
 
@@ -103,6 +108,17 @@
                 android:textColor="#FFF" />
 
         </LinearLayout>
+
+        <Button
+            android:text="@string/connect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/connect_phones"
+            android:background="@color/colorAccent"
+            android:layout_weight="0"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -111,13 +127,6 @@
         android:layout_height="match_parent"
         android:background="@color/shade4"
         android:layout_margin="3dp">
-
-        <Button
-            android:text="@string/connect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/connect_phones"
-            android:background="@color/colorAccent" />
 
         <ImageView
             android:layout_width="match_parent"
