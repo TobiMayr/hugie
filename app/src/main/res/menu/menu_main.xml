@@ -9,7 +9,7 @@
         android:id="@+id/action_other"
         android:orderInCategory="200"
         android:title="Other"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@android:drawable/ic_menu_today"
         app:showAsAction="ifRoom"
         />
 </menu>

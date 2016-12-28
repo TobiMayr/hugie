@@ -3,6 +3,7 @@ package com.example.tobi.hugie;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }S
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -110,9 +111,11 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        android.app.FragmentManager fragmentManager = getFragmentManager();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_other) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new OtherFragment()).commit();
             return true;
         }
 
