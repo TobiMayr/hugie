@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="connected">Conectado. Vos puedes recibier</string>
-    <string name="status">"Escuchando en IP: "</string>
+    <string name="listening_on">"Escuchando en IP: "</string>
     <string name="copied_ip">IP copiada</string>
     <string name="nothing_clipboard">Nada para pegar</string>
     <string name="no_text_clipboard">Ningún texto para pegar</string>
@@ -10,4 +10,9 @@
     <string name="paste_ip">Pegar IP</string>
     <string name="connect">Conectar</string>
     <string name="send">Enviar</string>
+    <string name="enter_receiver_ip">Ingresar IP de pareja:</string>
+    <string name="your_ip">Tu IP</string>
+    <string name="conn_interrupted">Oops. Conexión interrumpida. Reconecta por favor.</string>
+    <string name="no_internet_conn">No se pudó encontrar ninguna conexión al internet</string>
+    <string name="error_msg">Error</string>
 </resources>

@@ -5,17 +5,29 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:text="No status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/status"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:gravity="center"
+        android:background="@color/shade1"
+        android:layout_margin="3dp" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#7F7">
+        android:background="@color/shade2"
+        android:layout_margin="3dp">
 
         <TextView
-            android:text="@string/status"
+            android:text="@string/listening_on"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/server_status" />
+            android:id="@+id/listening_on" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -23,7 +35,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="Your IP"
+                android:text="@string/your_ip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/device_server_ip"
@@ -52,10 +64,11 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AFA">
+        android:background="@color/shade3"
+        android:layout_margin="3dp">
 
         <TextView
-            android:text="Enter receiver IP:"
+            android:text="@string/enter_receiver_ip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView" />
@@ -96,7 +109,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#DFD">
+        android:background="@color/shade4"
+        android:layout_margin="3dp">
 
         <Button
             android:text="@string/connect"
@@ -104,12 +118,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/connect_phones"
             android:background="@color/colorAccent" />
-
-        <Button
-            android:text="@string/send"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/send_button" />
 
         <ImageView
             android:layout_width="match_parent"

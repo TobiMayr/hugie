@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Hugie</string>
     <string name="connected">Connected! You are the receiver</string>
-    <string name="status">"Listening on IP: "</string>
+    <string name="listening_on">"Listening on IP: "</string>
     <string name="copied_ip">Copied IP</string>
     <string name="nothing_clipboard">Nothing to paste</string>
     <string name="no_text_clipboard">No text to paste</string>
@@ -10,4 +10,9 @@
     <string name="paste_ip">Paste IP</string>
     <string name="connect">Connect</string>
     <string name="send">Send</string>
+    <string name="enter_receiver_ip">Enter partner\'s IP:</string>
+    <string name="your_ip">Your IP</string>
+    <string name="conn_interrupted">Oops. Connection interrupted. Please reconnect your phones.</string>
+    <string name="no_internet_conn">Couldn\'t detect internet connection.</string>
+    <string name="error_msg">Error</string>
 </resources>

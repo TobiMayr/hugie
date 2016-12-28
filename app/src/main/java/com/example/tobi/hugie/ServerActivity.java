@@ -38,7 +38,7 @@ public class ServerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        serverStatus = (TextView) findViewById(R.id.server_status);
+        serverStatus = (TextView) findViewById(R.id.listening_on);
 
         SERVERIP = getLocalIpAddress();
 

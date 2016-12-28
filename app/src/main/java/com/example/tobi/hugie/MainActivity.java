@@ -4,7 +4,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Handler;
-import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,8 +31,8 @@ import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView serverStatus;
-
+    private TextView listeningOnText;
+    private TextView status;
     // DEFAULT IP
     public static String SERVERIP = "10.0.2.15";
 
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button copyButton;
     private Button pasteButton;
-    private Button sendButton;
     private ImageView hugImage;
     private TextView deviceServerIp;
 
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        serverStatus = (TextView) findViewById(R.id.server_status);
+        listeningOnText = (TextView) findViewById(R.id.listening_on);
 
         SERVERIP = getLocalIpAddress();
 
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         hugImage = (ImageView) findViewById(R.id.hug_image);
-        sendButton = (Button) findViewById(R.id.send_button);
+        status = (TextView) findViewById(R.id.status);
         /*sendButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 hugImage.setVisibility(View.VISIBLE);
@@ -136,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            serverStatus.setText(getString(R.string.status));
+
                             deviceServerIp.setText(SERVERIP);
                         }
                     });
@@ -147,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                serverStatus.setText(R.string.connected);
+                                status.setText(R.string.connected);
 
                             }
                         });
@@ -171,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    serverStatus.setText("Oops. Connection interrupted. Please reconnect your phones.");
+                                    status.setText(R.string.conn_interrupted);
                                 }
                             });
                             e.printStackTrace();
@@ -181,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            serverStatus.setText("Couldn't detect internet connection.");
+                            status.setText(R.string.no_internet_conn);
                         }
                     });
                 }
@@ -189,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        serverStatus.setText("Error");
+                        status.setText(R.string.error_msg);
                     }
                 });
                 e.printStackTrace();
