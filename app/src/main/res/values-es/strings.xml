@@ -15,4 +15,5 @@
     <string name="conn_interrupted">Oops. Conexión interrumpida. Reconecta por favor.</string>
     <string name="no_internet_conn">No se pudó encontrar ninguna conexión al internet</string>
     <string name="error_msg">Error</string>
+    <string name="left_year_string" formatted="false">Días: %d Horas: %d Minutos: %d Segundos: %d</string>
 </resources>

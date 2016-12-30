@@ -4,7 +4,12 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,9 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,11 +39,12 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.text.BreakIterator;
 import java.util.Enumeration;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private TextView listeningOnText;
     private TextView status;
@@ -60,7 +71,13 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean connected = false;
     private Toolbar toolbar;
-
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
+    private TextView mLatitudeText;
+    private TextView mLongitudeText;
+    private FrameLayout contentFrame;
+    private boolean isOthersOpen = false;
+    private OtherFragment oF = new OtherFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +113,19 @@ public class MainActivity extends AppCompatActivity {
                 hugImage.setVisibility(View.VISIBLE);
             }
         });*/
+
+        mLatitudeText = (TextView) findViewById(R.id.latitude_text);
+        mLongitudeText = (TextView) findViewById(R.id.longitude_text);
+
+        contentFrame = (FrameLayout) findViewById(R.id.content_frame);
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
     }
 
     @Override
@@ -103,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }S
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -113,24 +143,37 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         android.app.FragmentManager fragmentManager = getFragmentManager();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_other) {
+        if (id == R.id.action_other && !isOthersOpen) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new OtherFragment()).commit();
+                    .replace(R.id.content_frame, oF)
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    .show(oF)
+                    .commit();
+            isOthersOpen = true;
+            return true;
+        }
+        else if (id == R.id.action_other && isOthersOpen){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, oF)
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    .hide(oF)
+                    .commit();
+            isOthersOpen = false;
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void CopyIp(){
-        ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+    public void CopyIp() {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("ServerIP", SERVERIP);
         clipboard.setPrimaryClip(clip);
         Toast toast = Toast.makeText(getApplicationContext(), R.string.copied_ip, Toast.LENGTH_SHORT);
         toast.show();
     }
 
-    public void PasteIp(){
+    public void PasteIp() {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
         String pasteData = "";
@@ -155,6 +198,39 @@ public class MainActivity extends AppCompatActivity {
         serverIp.setText(pasteData);
     }
 
+    @Override
+    public void onConnected(@Nullable Bundle connectionHint) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
 
     public class ServerThread implements Runnable {
 
@@ -252,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        mGoogleApiClient.disconnect();
     }
 
     //Cliet side
