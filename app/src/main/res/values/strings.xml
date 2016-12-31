@@ -16,4 +16,6 @@
     <string name="no_internet_conn">Couldn\'t detect internet connection.</string>
     <string name="error_msg">Error</string>
     <string name="left_year_string" formatted="false">Days: %d Hours: %d Minutes: %d Seconds: %d</string>
+    <string name="countdown_aniversary">Countdown Aniversary:</string>
+    <string name="countdown_mensiversary">Countdown Mensiversary:</string>
 </resources>

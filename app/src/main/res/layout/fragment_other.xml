@@ -16,7 +16,7 @@
         android:id="@+id/longitude_text" />
 
     <TextView
-        android:text="Countdown Aniversary:"
+        android:text="@string/countdown_aniversary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_Count_Year" />
@@ -25,5 +25,17 @@
         android:text="Left until Year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_Count_Year_display" />
+        android:id="@+id/tv_count_year_display" />
+
+    <TextView
+        android:text="@string/countdown_mensiversary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_count_month" />
+
+    <TextView
+        android:text="Left until Month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_count_month_display" />
 </LinearLayout>
