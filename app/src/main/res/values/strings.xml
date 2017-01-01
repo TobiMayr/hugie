@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hugie</string>
+    <string name="app_name">hugie</string>
     <string name="connected">Connected! You are the receiver</string>
     <string name="listening_on">"Listening on IP: "</string>
     <string name="copied_ip">Copied IP</string>
@@ -18,4 +18,5 @@
     <string name="left_year_string" formatted="false">Days: %d Hours: %d Minutes: %d Seconds: %d</string>
     <string name="countdown_aniversary">Countdown Aniversary:</string>
     <string name="countdown_mensiversary">Countdown Mensiversary:</string>
+    <string name="time_since_start">Time since start:</string>
 </resources>

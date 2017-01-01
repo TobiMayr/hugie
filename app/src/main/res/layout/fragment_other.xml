@@ -59,7 +59,7 @@
 
         <com.example.tobi.hugie.FontTextView
             app:font_type="vanilla_extract"
-            android:text="Time since start:"
+            android:text="@string/time_since_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_count_since" />
