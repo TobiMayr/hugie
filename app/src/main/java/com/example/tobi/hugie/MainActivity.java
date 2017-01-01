@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +24,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,6 +40,9 @@ import java.text.BreakIterator;
 import java.util.Enumeration;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         contentFrame = (FrameLayout) findViewById(R.id.content_frame);
 
+        FontTextView ftv = new FontTextView(getApplicationContext());
+
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -151,8 +153,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     .commit();
             isOthersOpen = true;
             return true;
-        }
-        else if (id == R.id.action_other && isOthersOpen){
+        } else if (id == R.id.action_other && isOthersOpen) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, oF)
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
@@ -199,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     @Override
-    public void onConnected(@Nullable Bundle connectionHint) {
+    public void onConnected(Bundle connectionHint) {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -208,7 +209,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
@@ -319,6 +319,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     protected void onStop() {
+        mGoogleApiClient.disconnect();
         super.onStop();
         try {
             // MAKE SURE YOU CLOSE THE SOCKET UPON EXITING
@@ -328,7 +329,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mGoogleApiClient.disconnect();
     }
 
     //Cliet side

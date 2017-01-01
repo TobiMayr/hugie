@@ -2,7 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include
@@ -16,25 +17,26 @@
         android:layout_height="wrap_content">
     </FrameLayout>
 
-    <TextView
+    <com.example.tobi.hugie.FontTextView
         android:text="No status"
+        app:font_type="vanilla_extract"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/status"
         android:textSize="30sp"
-        android:textStyle="normal|bold"
         android:gravity="center"
-        android:background="@color/shade2"
-        android:layout_margin="3dp" />
+        android:background="@color/purpleShade"
+        android:layout_margin="3dp"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/shade2"
+        android:background="@color/purpleShade"
         android:layout_margin="3dp">
 
-        <TextView
+        <com.example.tobi.hugie.FontTextView
+            app:font_type="vanilla_extract"
             android:text="@string/listening_on"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,10 +77,11 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/shade2"
+        android:background="@color/purpleShade"
         android:layout_margin="3dp">
 
-        <TextView
+        <com.example.tobi.hugie.FontTextView
+            app:font_type="vanilla_extract"
             android:text="@string/enter_receiver_ip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,6 +129,18 @@
             android:textColor="@android:color/white" />
 
     </LinearLayout>
+
+    <TextView
+        android:text="Latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitude_text" />
+
+    <TextView
+        android:text="Longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitude_text" />
 
     <LinearLayout
         android:orientation="vertical"

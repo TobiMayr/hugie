@@ -1,58 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:text="Latitude"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/latitude_text" />
+        android:background="@color/greenShade"
+        android:layout_margin="3dp">
 
-    <TextView
-        android:text="Longitude"
+        <com.example.tobi.hugie.FontTextView
+            app:font_type="vanilla_extract"
+            android:text="@string/countdown_aniversary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_Count_Year"
+            android:textSize="14sp" />
+
+        <TextView
+            android:text="Left until Year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_count_year_display"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/longitude_text" />
+        android:background="@color/greenShade"
+        android:layout_margin="3dp">
 
-    <TextView
-        android:text="@string/countdown_aniversary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_Count_Year" />
+        <com.example.tobi.hugie.FontTextView
+            app:font_type="vanilla_extract"
+            android:text="@string/countdown_mensiversary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_count_month"
+            android:textSize="14sp" />
 
-    <TextView
-        android:text="Left until Year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_count_year_display" />
+        <TextView
+            android:text="Left until Month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_count_month_display"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-    <TextView
-        android:text="@string/countdown_mensiversary"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_count_month" />
+        android:background="@color/greenShade"
+        android:layout_margin="3dp">
 
-    <TextView
-        android:text="Left until Month"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_count_month_display" />
+        <com.example.tobi.hugie.FontTextView
+            app:font_type="vanilla_extract"
+            android:text="Time since start:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_count_since" />
 
-    <TextView
-        android:text="Time since start:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_count_since" />
+        <Chronometer
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ch_count_since_display"
+            android:visibility="gone"/>
 
-    <Chronometer
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ch_count_since_display" />
+        <TextView
+            android:text="Since start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_count_since_display"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-    <TextView
-        android:text="Since start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_count_since_display" />
 </LinearLayout>

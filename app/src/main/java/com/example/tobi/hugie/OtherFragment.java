@@ -28,6 +28,9 @@ public class OtherFragment extends android.app.Fragment{
     TextView tvCountdownSince;
     private Handler handler;
     private Runnable runnable;
+    int year = 2015;
+    int month = 1;
+    int day = 7;
 
     @Nullable
     @Override
@@ -166,7 +169,7 @@ public class OtherFragment extends android.app.Fragment{
             public void run(){
                 handler.postDelayed(this, 1000);
                 try {
-                    FestCountdownTimer timer = new FestCountdownTimer(00, 00, 9, 3, 01, 2011);
+                    FestCountdownTimer timer = new FestCountdownTimer(0, 0, 0, day, month, year);
                     new CountDownTimer(-timer.getIntervalMillis(), 1000) {
                         @Override
                         public void onTick(long millisUntilFinished){
