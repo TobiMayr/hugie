@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.location.Location;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private Button copyButton;
     private Button pasteButton;
     private ImageView hugImage;
+    AnimationDrawable hugAnimation;
     private TextView deviceServerIp;
 
     private String serverIpAddress = "";
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
         });
         hugImage = (ImageView) findViewById(R.id.hug_image);
+        hugImage.setBackgroundResource(R.drawable.hug_animation);
+        hugAnimation = (AnimationDrawable) hugImage.getBackground();
         status = (TextView) findViewById(R.id.status);
         /*sendButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -270,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                                         // DO WHATEVER YOU WANT TO THE FRONT END
                                         // THIS IS WHERE YOU CAN BE CREATIVE
                                         hugImage.setVisibility(View.VISIBLE);
+                                        hugAnimation.start();
                                                                                 }
                                 });
                             }
