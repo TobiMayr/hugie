@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         listeningOnText = (TextView) findViewById(R.id.listening_on);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setLogo(R.mipmap.icon);
+
         SERVERIP = getLocalIpAddress();
 
         Thread fst = new Thread(new ServerThread());

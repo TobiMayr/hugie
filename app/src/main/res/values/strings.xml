@@ -8,7 +8,7 @@
     <string name="pasted_ip">Pasted IP</string>
     <string name="copy_ip">Copy IP</string>
     <string name="paste_ip">Paste IP</string>
-    <string name="connect">Connect</string>
+    <string name="connect">Send hugie!</string>
     <string name="send">Send</string>
     <string name="enter_receiver_ip">Enter partner\'s IP:</string>
     <string name="your_ip">Your IP</string>
