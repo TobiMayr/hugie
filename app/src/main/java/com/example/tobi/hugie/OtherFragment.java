@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class OtherFragment extends android.app.Fragment{
         int month = 1;
         int day = 7;
 
-        countDownStart();
+        //countDownStart();
         final long ALMOST_YEAR= 1000*60*60*24*300;
         final long ALMOST_MONTH= 1000*60*60*24*27;
         Calendar endCalendar = Calendar.getInstance();
@@ -55,13 +56,13 @@ public class OtherFragment extends android.app.Fragment{
         long endMillis = endCalendar.getTimeInMillis(); //get the end time in milliseconds
         long totalMillis = (endMillis - startMillis); //total time in milliseconds
 
-/*
+
         chCountdownSince.setBase(endMillis);
 
         chCountdownSince.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             public void onChronometerTick(Chronometer cArg) {
-                long t = System.currentTimeMillis() - chCountdownSince.getBase();
 
+                long t = System.currentTimeMillis() - chCountdownSince.getBase();
                 long days = TimeUnit.MILLISECONDS.toDays(t);
                 t -= TimeUnit.DAYS.toMillis(days);
 
@@ -73,14 +74,12 @@ public class OtherFragment extends android.app.Fragment{
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(t);
                 final String leftYearString = String.format(getString(R.string.left_year_string), days, hours, minutes, seconds);
-                tvCountdownSince.post(new Runnable() {
-                    public void run() {
-                        tvCountdownSince.setText(leftYearString);
-                    }
-                });
+                Log.d("Entered in tick", leftYearString);
+                tvCountdownSince.setText(leftYearString);
             }
         });
-*/
+        chCountdownSince.start();
+
         for (long i = totalMillis; i < 0; i+=ALMOST_YEAR) {
             if (totalMillis < 0){
                 endCalendar.set(++year, month, day);
@@ -161,7 +160,7 @@ public class OtherFragment extends android.app.Fragment{
 
         return otherFragmentView;
     }
-
+/*
     public void countDownStart() {
         handler = new Handler();
         runnable = new Runnable(){
@@ -193,6 +192,6 @@ public class OtherFragment extends android.app.Fragment{
         };
         handler.postDelayed(runnable, 1 * 1000);
 
-    }
+    }*/
 }
 
