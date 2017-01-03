@@ -21,25 +21,43 @@ import android.os.Handler;
 public class OtherFragment extends android.app.Fragment{
 
     private View otherFragmentView;
-    private TextView tvCountdownYear;
-    private TextView tvCountdownMonth;
     private Chronometer chCountdownSince;
-    private TextView tvCountdownSince;
     int year = 2015;
     int month = 1;
     int day = 7;
     final long ALMOST_YEAR= 1000*60*60*24*300;
     final long ALMOST_MONTH= 1000*60*60*24*27;
+    private TextView daysAni;
+    private TextView hoursAni;
+    private TextView minutesAni;
+    private TextView secondsAni;
+    private TextView daysMen;
+    private TextView hoursMen;
+    private TextView minutesMen;
+    private TextView secondsMen;
+    private TextView daysSince;
+    private TextView hoursSince;
+    private TextView minutesSince;
+    private TextView secondsSince;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         otherFragmentView = inflater.inflate(R.layout.fragment_other, container, false);
 
-        tvCountdownYear = (TextView) otherFragmentView.findViewById(R.id.tv_count_year_display);
-        tvCountdownMonth = (TextView) otherFragmentView.findViewById(R.id.tv_count_month_display);
         chCountdownSince = (Chronometer) otherFragmentView.findViewById(R.id.ch_count_since_display);
-        tvCountdownSince = (TextView) otherFragmentView.findViewById(R.id.tv_count_since_display);
+        daysAni = (TextView) otherFragmentView.findViewById(R.id.days_ani);
+        hoursAni = (TextView) otherFragmentView.findViewById(R.id.hours_ani);
+        minutesAni = (TextView) otherFragmentView.findViewById(R.id.minutes_ani);
+        secondsAni = (TextView) otherFragmentView.findViewById(R.id.seconds_ani);
+        daysMen = (TextView) otherFragmentView.findViewById(R.id.days_men);
+        hoursMen = (TextView) otherFragmentView.findViewById(R.id.hours_men);
+        minutesMen = (TextView) otherFragmentView.findViewById(R.id.minutes_men);
+        secondsMen = (TextView) otherFragmentView.findViewById(R.id.seconds_men);
+        daysSince = (TextView) otherFragmentView.findViewById(R.id.days_since);
+        hoursSince = (TextView) otherFragmentView.findViewById(R.id.hours_since);
+        minutesSince = (TextView) otherFragmentView.findViewById(R.id.minutes_since);
+        secondsSince = (TextView) otherFragmentView.findViewById(R.id.seconds_since);
         year = 2015;
         month = 1;
         day = 7;
@@ -59,17 +77,18 @@ public class OtherFragment extends android.app.Fragment{
                 long t = System.currentTimeMillis() - chCountdownSince.getBase();
                 long days = TimeUnit.MILLISECONDS.toDays(t);
                 t -= TimeUnit.DAYS.toMillis(days);
-
+                daysSince.setText(String.valueOf(days));
+                
                 long hours = TimeUnit.MILLISECONDS.toHours(t);
                 t -= TimeUnit.HOURS.toMillis(hours);
+                hoursSince.setText(String.valueOf(hours));
 
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(t);
                 t -= TimeUnit.MINUTES.toMillis(minutes);
+                minutesSince.setText(String.valueOf(minutes));
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(t);
-                final String leftYearString = String.format(getString(R.string.left_year_string), days, hours, minutes, seconds);
-                Log.d("Entered in tick", leftYearString);
-                tvCountdownSince.setText(leftYearString);
+                secondsSince.setText(String.valueOf(seconds));
             }
         });
         chCountdownSince.start();
@@ -108,17 +127,18 @@ public class OtherFragment extends android.app.Fragment{
             public void onTick(long millisUntilFinished) {
                 long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
                 millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+                daysAni.setText(String.valueOf(days));
 
                 long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
                 millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+                hoursAni.setText(String.valueOf(hours));
 
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
                 millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+                minutesAni.setText(String.valueOf(minutes));
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-                String leftYearString = getString(R.string.left_year_string);
-                leftYearString = String.format(leftYearString, days, hours, minutes, seconds);
-                tvCountdownYear.setText(leftYearString);
+                secondsAni.setText(String.valueOf(seconds));
             }
 
             @Override
@@ -132,17 +152,18 @@ public class OtherFragment extends android.app.Fragment{
             public void onTick(long millisUntilFinished) {
                 long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
                 millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+                daysMen.setText(String.valueOf(days));
 
                 long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
                 millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+                hoursMen.setText(String.valueOf(hours));
 
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
                 millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+                minutesMen.setText(String.valueOf(minutes));
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-                String leftYearString = getString(R.string.left_year_string);
-                leftYearString = String.format(leftYearString, days, hours, minutes, seconds);
-                tvCountdownMonth.setText(leftYearString);
+                secondsMen.setText(String.valueOf(seconds));
             }
 
             @Override

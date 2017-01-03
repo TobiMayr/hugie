@@ -19,4 +19,8 @@
     <string name="countdown_aniversary">Countdown Aniversary:</string>
     <string name="countdown_mensiversary">Countdown Mensiversary:</string>
     <string name="time_since_start">Time since start:</string>
+    <string name="seconds">Seconds</string>
+    <string name="minutes">Minutes</string>
+    <string name="hours">Hours</string>
+    <string name="days">Days</string>
 </resources>

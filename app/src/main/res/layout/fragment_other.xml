@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/greenShade"
-        android:layout_margin="3dp">
+        android:layout_margin="3dp"
+        android:padding="3dp">
 
         <com.example.tobi.hugie.FontTextView
             app:font_type="vanilla_extract"
@@ -19,12 +21,116 @@
             android:id="@+id/tv_Count_Year"
             android:textSize="14sp" />
 
-        <TextView
-            android:text="Left until Year"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_count_year_display"
-            android:textSize="18sp" />
+            android:layout_height="match_parent"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/days_ani"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize" />
+
+                <TextView
+                    app:font_type="vanilla_extract"
+                    android:text="@string/days"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/days1"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hours_ani"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/hours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hours1"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/minutes_ani"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/minutes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/minutes1"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seconds_ani"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/seconds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seconds1"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -32,7 +138,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/greenShade"
-        android:layout_margin="3dp">
+        android:layout_margin="3dp"
+        android:padding="3dp">
 
         <com.example.tobi.hugie.FontTextView
             app:font_type="vanilla_extract"
@@ -42,12 +149,115 @@
             android:id="@+id/tv_count_month"
             android:textSize="14sp" />
 
-        <TextView
-            android:text="Left until Month"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_count_month_display"
-            android:textSize="18sp" />
+            android:layout_height="match_parent"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/days_men"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize" />
+
+                <TextView
+                    android:text="@string/days"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/days2"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hours_men"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/hours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hours2"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/minutes_men"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/minutes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/minutes2"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                app:font_type="vanilla_extract"
+                    android:text="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seconds_men"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/seconds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seconds2"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +265,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/greenShade"
-        android:layout_margin="3dp">
+        android:layout_margin="3dp"
+        android:padding="3dp">
 
         <com.example.tobi.hugie.FontTextView
             app:font_type="vanilla_extract"
@@ -64,18 +275,121 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_count_since" />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/days_since"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize" />
+
+                <TextView
+                    android:text="@string/days"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/days3"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hours_since"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/hours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hours3"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/minutes_since"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/minutes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/minutes3"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="3dp">
+
+                <com.example.tobi.hugie.FontTextView
+                    app:font_type="vanilla_extract"
+                    android:text="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seconds_since"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/time_textsize"/>
+
+                <TextView
+                    android:text="@string/seconds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seconds3"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
         <Chronometer
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ch_count_since_display"
             android:visibility="gone"/>
 
-        <TextView
-            android:text="Since start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_count_since_display"
-            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

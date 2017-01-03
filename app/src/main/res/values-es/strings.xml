@@ -19,4 +19,8 @@
     <string name="countdown_aniversary">Tiempo hasta el proximo aniversario:</string>
     <string name="countdown_mensiversary">Tiempo hasta el proximo mesesario:</string>
     <string name="time_since_start">Tiempo hasta el comienzo:</string>
+    <string name="seconds">Seconds</string>
+    <string name="minutes">Minutes</string>
+    <string name="hours">Hours</string>
+    <string name="days">Days</string>
 </resources>
