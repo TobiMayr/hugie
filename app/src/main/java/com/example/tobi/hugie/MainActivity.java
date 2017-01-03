@@ -3,18 +3,15 @@ package com.example.tobi.hugie;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Location;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +34,6 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.text.BreakIterator;
 import java.util.Enumeration;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
@@ -47,7 +43,6 @@ import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private TextView listeningOnText;
     private TextView status;
     // DEFAULT IP
     public static String SERVERIP = "10.0.2.15";
@@ -61,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private EditText serverIp;
 
-    private Button connectPhones;
-
-    private Button copyButton;
     private Button pasteButton;
     private ImageView hugImage;
     AnimationDrawable hugAnimation;
@@ -85,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listeningOnText = (TextView) findViewById(R.id.listening_on);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -97,9 +88,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         fst.start();
         deviceServerIp = (TextView) findViewById(R.id.device_server_ip);
         serverIp = (EditText) findViewById(R.id.server_ip);
-        connectPhones = (Button) findViewById(R.id.connect_phones);
+        Button connectPhones = (Button) findViewById(R.id.connect_phones);
         connectPhones.setOnClickListener(connectListener);
-        copyButton = (Button) findViewById(R.id.copy_button);
+        Button copyButton = (Button) findViewById(R.id.copy_button);
         copyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 CopyIp();
@@ -115,18 +106,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         hugImage.setBackgroundResource(R.drawable.hug_animation);
         hugAnimation = (AnimationDrawable) hugImage.getBackground();
         status = (TextView) findViewById(R.id.status);
-        /*sendButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                hugImage.setVisibility(View.VISIBLE);
-            }
-        });*/
 
         mLatitudeText = (TextView) findViewById(R.id.latitude_text);
         mLongitudeText = (TextView) findViewById(R.id.longitude_text);
 
         contentFrame = (FrameLayout) findViewById(R.id.content_frame);
-
-        FontTextView ftv = new FontTextView(getApplicationContext());
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="connected">Conectado. Vos puedes recibier</string>
+    <string name="connected">Has recibido un abracito!</string>
     <string name="listening_on">"Escuchando en IP: "</string>
     <string name="copied_ip">IP copiada</string>
     <string name="nothing_clipboard">Nada para pegar</string>

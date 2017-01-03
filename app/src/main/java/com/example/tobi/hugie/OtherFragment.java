@@ -2,9 +2,7 @@ package com.example.tobi.hugie;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,37 +23,33 @@ public class OtherFragment extends android.app.Fragment{
     private View otherFragmentView;
     private TextView tvCountdownYear;
     private TextView tvCountdownMonth;
-    //private Chronometer chCountdownSince;
-    TextView tvCountdownSince;
-    private Handler handler;
-    private Runnable runnable;
+    private Chronometer chCountdownSince;
+    private TextView tvCountdownSince;
     int year = 2015;
     int month = 1;
     int day = 7;
+    final long ALMOST_YEAR= 1000*60*60*24*300;
+    final long ALMOST_MONTH= 1000*60*60*24*27;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         otherFragmentView = inflater.inflate(R.layout.fragment_other, container, false);
 
-        final TextView tvCountdownYear = (TextView) otherFragmentView.findViewById(R.id.tv_count_year_display);
-        final TextView tvCountdownMonth = (TextView) otherFragmentView.findViewById(R.id.tv_count_month_display);
-        final Chronometer chCountdownSince = (Chronometer) otherFragmentView.findViewById(R.id.ch_count_since_display);
+        tvCountdownYear = (TextView) otherFragmentView.findViewById(R.id.tv_count_year_display);
+        tvCountdownMonth = (TextView) otherFragmentView.findViewById(R.id.tv_count_month_display);
+        chCountdownSince = (Chronometer) otherFragmentView.findViewById(R.id.ch_count_since_display);
         tvCountdownSince = (TextView) otherFragmentView.findViewById(R.id.tv_count_since_display);
-        int year = 2015;
-        int month = 1;
-        int day = 7;
+        year = 2015;
+        month = 1;
+        day = 7;
 
-        //countDownStart();
-        final long ALMOST_YEAR= 1000*60*60*24*300;
-        final long ALMOST_MONTH= 1000*60*60*24*27;
         Calendar endCalendar = Calendar.getInstance();
         endCalendar.set(year, month, day, 0, 0, 0);
 
         long startMillis = System.currentTimeMillis(); //get the start time in milliseconds
         long endMillis = endCalendar.getTimeInMillis(); //get the end time in milliseconds
         long totalMillis = (endMillis - startMillis); //total time in milliseconds
-
 
         chCountdownSince.setBase(endMillis);
 
@@ -109,7 +103,6 @@ public class OtherFragment extends android.app.Fragment{
             }
         }
 
-
         CountDownTimer cdt = new CountDownTimer(totalMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -160,38 +153,5 @@ public class OtherFragment extends android.app.Fragment{
 
         return otherFragmentView;
     }
-/*
-    public void countDownStart() {
-        handler = new Handler();
-        runnable = new Runnable(){
-            @Override
-            public void run(){
-                handler.postDelayed(this, 1000);
-                try {
-                    FestCountdownTimer timer = new FestCountdownTimer(0, 0, 0, day, month, year);
-                    new CountDownTimer(-timer.getIntervalMillis(), 1000) {
-                        @Override
-                        public void onTick(long millisUntilFinished){
-                            int days = (int) ((millisUntilFinished / 1000) / 86400);
-                            int hours = (int) (((millisUntilFinished / 1000)
-                                    - (days * 86400)) / 3600);
-                            int minutes = (int) (((millisUntilFinished / 1000)
-                                    - (days * 86400) - (hours * 3600)) / 60);
-                            int seconds = (int) ((millisUntilFinished / 1000) % 60);
-                            String daysPast = String.format("Days past: %d", days);
-                            tvCountdownSince.setText(daysPast);
-                        }
-                        @Override
-                        public void onFinish() {
-
-                        }
-                    }.start();
-                } catch (Exception e) {
-                    e.printStackTrace();                }
-            }
-        };
-        handler.postDelayed(runnable, 1 * 1000);
-
-    }*/
 }
 
