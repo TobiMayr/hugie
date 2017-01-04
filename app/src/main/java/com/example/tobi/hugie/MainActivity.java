@@ -69,12 +69,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private Toolbar toolbar;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
-    private Location finalLoc;
+    private Location myLocation;
     private TextView mLatitudeText;
     private TextView mLongitudeText;
     private FrameLayout contentFrame;
     private boolean isOthersOpen = false;
     private OtherFragment oF = new OtherFragment();
+    float distanceInMeters;
+    private TextView distanceText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,11 +124,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     .addApi(LocationServices.API)
                     .build();
         }
-        finalLoc = getMostAccurateLocation(getApplicationContext());
-        if (finalLoc != null) {
-            mLatitudeText.setText(String.valueOf(finalLoc.getLatitude()));
-            mLongitudeText.setText(String.valueOf(finalLoc.getLongitude()));
+        myLocation = getMostAccurateLocation(getApplicationContext());
+        if (myLocation != null) {
+            mLatitudeText.setText(String.valueOf(myLocation.getLatitude()));
+            mLongitudeText.setText(String.valueOf(myLocation.getLongitude()));
         }
+        distanceText = (TextView) findViewById(R.id.tv_distance);
     }
 
     @Override
@@ -200,21 +203,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle connectionHint) {
-/*        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        myLocation = getMostAccurateLocation(getApplicationContext());
+        if (myLocation != null) {
+            mLatitudeText.setText(String.valueOf(myLocation.getLatitude()));
+            mLongitudeText.setText(String.valueOf(myLocation.getLongitude()));
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-        }*/
     }
 
     @Override
@@ -246,13 +239,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
             if (gps_enabled)
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
                 }
             gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (network_enabled)
@@ -281,6 +267,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             e.printStackTrace();
         }
         return finalLoc;
+    }
+
+    public static String locationStringFromLocation(final Location location) {
+        return Location.convert(location.getLatitude(), Location.FORMAT_DEGREES) + " " + Location.convert(location.getLongitude(), Location.FORMAT_DEGREES);
     }
 
     public class ServerThread implements Runnable {
@@ -312,6 +302,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                             String line = null;
                             while ((line = in.readLine()) != null) {
                                 Log.d("ServerActivity", line);
+                                final String finalLine = line;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -319,6 +310,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                                         // THIS IS WHERE YOU CAN BE CREATIVE
                                         hugImage.setVisibility(View.VISIBLE);
                                         hugAnimation.start();
+
+                                        String locationString = finalLine;
+                                        String[] locArray = locationString.split(" ");
+                                        if(locArray.length >= 2 ){
+                                            Location targetLocation = new Location("");
+                                            targetLocation.setLatitude(Double.parseDouble(locArray[0]));
+                                            targetLocation.setLongitude(Double.parseDouble(locArray[1]));
+                                            distanceInMeters =  targetLocation.distanceTo(myLocation);
+                                            distanceText.setText(String.valueOf(distanceInMeters));
+                                        }
                                                                                 }
                                 });
                             }
@@ -412,7 +413,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket
                                 .getOutputStream())), true);
                         // WHERE YOU ISSUE THE COMMANDS
-                        out.println("Hey Server!");
+                        String locationString = locationStringFromLocation(myLocation);
+                        out.append(locationString);
                         Log.d("ClientActivity", "C: Sent.");
                     } catch (Exception e) {
                         Log.e("ClientActivity", "S: Error", e);
