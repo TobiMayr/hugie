@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -37,6 +38,7 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private Toolbar toolbar;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
+    private Location finalLoc;
     private TextView mLatitudeText;
     private TextView mLongitudeText;
     private FrameLayout contentFrame;
@@ -118,6 +121,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
+        }
+        finalLoc = getMostAccurateLocation(getApplicationContext());
+        if (finalLoc != null) {
+            mLatitudeText.setText(String.valueOf(finalLoc.getLatitude()));
+            mLongitudeText.setText(String.valueOf(finalLoc.getLongitude()));
         }
     }
 
@@ -192,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+/*        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -206,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         if (mLastLocation != null) {
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-        }
+        }*/
     }
 
     @Override
@@ -221,6 +229,58 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
+    }
+
+    public Location getMostAccurateLocation(Context mCtx) {
+        Location finalLoc = null;
+        try {
+            boolean gps_enabled = false;
+            boolean network_enabled = false;
+
+            LocationManager lm = (LocationManager) mCtx.getSystemService(Context.LOCATION_SERVICE);
+
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            Location net_loc = null, gps_loc = null;
+
+            if (gps_enabled)
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                }
+            gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (network_enabled)
+                net_loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            if (gps_loc != null && net_loc != null) {
+
+                //smaller the number more accurate result will
+                if (gps_loc.getAccuracy() > net_loc.getAccuracy())
+                    finalLoc = net_loc;
+                else
+                    finalLoc = gps_loc;
+
+                // I used this just to get an idea (if both avail, its upto you which you want to take as I've taken location with more accuracy)
+
+            } else {
+
+                if (gps_loc != null) {
+                    finalLoc = gps_loc;
+                } else if (net_loc != null) {
+                    finalLoc = net_loc;
+                }
+            }
+            return finalLoc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return finalLoc;
     }
 
     public class ServerThread implements Runnable {
@@ -323,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-    //Cliet side
+    //Client side
     private View.OnClickListener connectListener = new View.OnClickListener() {
 
         @Override

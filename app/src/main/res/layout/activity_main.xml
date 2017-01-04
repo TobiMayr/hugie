@@ -134,14 +134,12 @@
         android:text="Latitude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:id="@+id/latitude_text" />
 
     <TextView
         android:text="Longitude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:id="@+id/longitude_text" />
 
     <LinearLayout
