@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setLogo(R.mipmap.icon_font);
+        toolbar.setLogo(R.mipmap.logo_title);
 
         SERVERIP = getLocalIpAddress();
 
