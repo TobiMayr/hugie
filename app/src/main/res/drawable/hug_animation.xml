@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-        android:oneshot="true">
-        <item android:drawable="@drawable/frame_0" android:duration="200" />
-        <item android:drawable="@drawable/frame_1" android:duration="200" />
-        <item android:drawable="@drawable/frame_2" android:duration="200" />
-        <item android:drawable="@drawable/frame_3" android:duration="200" />
-        <item android:drawable="@drawable/frame_4" android:duration="200" />
-        <item android:drawable="@drawable/frame_5" android:duration="200" />
-        <item android:drawable="@drawable/frame_6" android:duration="200" />
-    </animation-list>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/hug00" android:duration="100" />
+    <item android:drawable="@drawable/hug01" android:duration="100" />
+    <item android:drawable="@drawable/hug02" android:duration="100" />
+    <item android:drawable="@drawable/hug03" android:duration="100" />
+    <item android:drawable="@drawable/hug04" android:duration="100" />
+    <item android:drawable="@drawable/hug05" android:duration="100" />
+    <item android:drawable="@drawable/hug06" android:duration="100" />
+    <item android:drawable="@drawable/hug07" android:duration="100" />
+    <item android:drawable="@drawable/hug08" android:duration="100" />
+    <item android:drawable="@drawable/hug09" android:duration="100" />
+    <item android:drawable="@drawable/hug10" android:duration="100" />
+    <item android:drawable="@drawable/hug11" android:duration="100" />
+    <item android:drawable="@drawable/hug12" android:duration="100" />
+    <item android:drawable="@drawable/hug13" android:duration="100" />
+    <item android:drawable="@drawable/hug14" android:duration="100" />
+</animation-list>

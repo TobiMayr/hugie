@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setLogo(R.mipmap.icon);
+        toolbar.setLogo(R.mipmap.icon_font);
 
         SERVERIP = getLocalIpAddress();
 
@@ -414,7 +414,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                                 .getOutputStream())), true);
                         // WHERE YOU ISSUE THE COMMANDS
                         String locationString = locationStringFromLocation(myLocation);
-                        out.append(locationString);
+                        out.println(locationString);
                         Log.d("ClientActivity", "C: Sent.");
                     } catch (Exception e) {
                         Log.e("ClientActivity", "S: Error", e);
