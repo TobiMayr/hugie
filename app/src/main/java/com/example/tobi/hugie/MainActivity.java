@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mLatitudeText = (TextView) findViewById(R.id.latitude_text);
         mLongitudeText = (TextView) findViewById(R.id.longitude_text);
 
-        contentFrame = (FrameLayout) findViewById(R.id.content_frame);
+        contentFrame = (FrameLayout) findViewById(R.id.other_frame);
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_other && !isOthersOpen) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, oF)
+                    .replace(R.id.other_frame, oF)
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                     .show(oF)
                     .commit();
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             return true;
         } else if (id == R.id.action_other && isOthersOpen) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, oF)
+                    .replace(R.id.other_frame, oF)
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                     .hide(oF)
                     .commit();

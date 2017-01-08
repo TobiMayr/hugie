@@ -12,7 +12,7 @@
         />
 
     <FrameLayout
-        android:id="@+id/content_frame"
+        android:id="@+id/other_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </FrameLayout>
@@ -150,19 +150,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_distance" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="3dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/hug_image"
-            android:background="@drawable/hug_animation"
-            android:visibility="invisible"/>
-
-    </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hug_image"
+        android:adjustViewBounds="true"
+        android:background="@drawable/hug_animation"
+        android:visibility="invisible"/>
 
 </LinearLayout>
