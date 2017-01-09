@@ -26,4 +26,5 @@
     <string name="hug_animation_desc">animacion huggie</string>
     <string name="distance_more">Están aproximadamente %.1f km aparte!</string>
     <string name="distance_less">Están menos de un km aparte!</string>
+    <string name="distance_error">No se pudó calcular la distancia</string>
 </resources>

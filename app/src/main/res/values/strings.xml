@@ -26,4 +26,5 @@
     <string name="hug_animation_desc">hugie animation</string>
     <string name="distance_more">You are about %.1f km away!</string>
     <string name="distance_less">You are less than a km away!</string>
+    <string name="distance_error">Distance could not be calculated</string>
 </resources>

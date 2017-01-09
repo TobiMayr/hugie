@@ -36,8 +36,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.Locale;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+import static java.lang.System.out;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -270,20 +272,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public static String locationStringFromLocation(final Location location) {
-        return Location.convert(location.getLatitude(), Location.FORMAT_DEGREES) + " " + Location.convert(location.getLongitude(), Location.FORMAT_DEGREES);
+        String lat = String.format(Locale.UK, "%f", Float.parseFloat(Location.convert(location.getLatitude(), Location.FORMAT_DEGREES)));
+        String lon = String.format(Locale.UK, "%f", Float.parseFloat(Location.convert(location.getLongitude(), Location.FORMAT_DEGREES)));
+        return lat + " " + lon;
     }
 
     public void setDistanceText (float distanceInMeters, TextView distanceTv) {
+        float distanceInKm = distanceInMeters / 1000;
         String distanceText;
-        if (distanceInMeters < 1) {
+        if (distanceInKm < 1)
             distanceText = getString(R.string.distance_less);
-        }
-        else if (distanceInMeters > 1){
-            String.format("%.2f", distanceInMeters);
-            distanceText = String.format(getString(R.string.distance_more), distanceInMeters);
-        }
+        else if (distanceInKm > 1)
+            distanceText = String.format(getString(R.string.distance_more), distanceInKm);
         else
-            distanceText = "Distance could not be calculated";
+            distanceText = getString(R.string.distance_error);
         distanceTv.setText(distanceText);
     }
 
@@ -307,7 +309,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                             @Override
                             public void run() {
                                 status.setText(R.string.connected);
-
+                                hugImage.setVisibility(View.VISIBLE);
+                                hugAnimation.start();
                             }
                         });
 
@@ -316,26 +319,28 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                             String line = null;
                             while ((line = in.readLine()) != null) {
                                 Log.d("ServerActivity", line);
-                                final String finalLine = line;
+                                final String locationString = line;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         // DO WHATEVER YOU WANT TO THE FRONT END
                                         // THIS IS WHERE YOU CAN BE CREATIVE
-                                        hugImage.setVisibility(View.VISIBLE);
-                                        hugAnimation.start();
 
-                                        String locationString = finalLine;
                                         String[] locArray = locationString.split(" ");
-                                        if(locArray.length >= 2 ){
+                                        if(locArray.length == 2 ) {
                                             Location targetLocation = new Location("");
-                                            targetLocation.setLatitude(Double.parseDouble(locArray[0]));
-                                            targetLocation.setLongitude(Double.parseDouble(locArray[1]));
-                                            distanceInMeters =  targetLocation.distanceTo(myLocation);
-                                            setDistanceText(distanceInMeters, distanceText);
-                                            //distanceText.setText(String.valueOf(distanceInMeters));
+                                            try {
+                                                double lat = Double.parseDouble(locArray[0]);
+                                                double lon = Double.parseDouble(locArray[1]);
+                                                targetLocation.setLatitude(lat);
+                                                targetLocation.setLongitude(lon);
+                                                distanceInMeters = targetLocation.distanceTo(myLocation);
+                                                setDistanceText(distanceInMeters, distanceText);
+                                            } catch (NumberFormatException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
-                                                                                }
+                                    }
                                 });
                             }
                             break;
