@@ -273,6 +273,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         return Location.convert(location.getLatitude(), Location.FORMAT_DEGREES) + " " + Location.convert(location.getLongitude(), Location.FORMAT_DEGREES);
     }
 
+    public void setDistanceText (float distanceInMeters, TextView distanceTv) {
+        String distanceText;
+        if (distanceInMeters < 1) {
+            distanceText = getString(R.string.distance_less);
+        }
+        else if (distanceInMeters > 1){
+            String.format("%.2f", distanceInMeters);
+            distanceText = String.format(getString(R.string.distance_more), distanceInMeters);
+        }
+        else
+            distanceText = "Distance could not be calculated";
+        distanceTv.setText(distanceText);
+    }
+
     public class ServerThread implements Runnable {
 
         public void run() {
@@ -318,7 +332,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                                             targetLocation.setLatitude(Double.parseDouble(locArray[0]));
                                             targetLocation.setLongitude(Double.parseDouble(locArray[1]));
                                             distanceInMeters =  targetLocation.distanceTo(myLocation);
-                                            distanceText.setText(String.valueOf(distanceInMeters));
+                                            setDistanceText(distanceInMeters, distanceText);
+                                            //distanceText.setText(String.valueOf(distanceInMeters));
                                         }
                                                                                 }
                                 });

@@ -23,4 +23,7 @@
     <string name="minutes">Minutes</string>
     <string name="hours">Hours</string>
     <string name="days">Days</string>
+    <string name="hug_animation_desc">hugie animation</string>
+    <string name="distance_more">You are about %.1f km away!</string>
+    <string name="distance_less">You are less than a km away!</string>
 </resources>

@@ -145,7 +145,8 @@
         android:visibility="gone"/>
 
     <TextView
-        android:text="TextView"
+        android:text=""
+        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_distance" />
@@ -156,6 +157,7 @@
         android:id="@+id/hug_image"
         android:adjustViewBounds="true"
         android:background="@drawable/hug_animation"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:contentDescription="@string/hug_animation_desc" />
 
 </LinearLayout>
