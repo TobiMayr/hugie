@@ -22,8 +22,8 @@ public class OtherFragment extends android.app.Fragment{
 
     private View otherFragmentView;
     private Chronometer chCountdownSince;
-    final long ALMOST_YEAR= 1000*60*60*24*300;
-    final long ALMOST_MONTH= 1000*60*60*24*27;
+    final long ALMOST_YEAR = 25920000000L; //1000*60*60*24*300;
+    final long ALMOST_MONTH = 2332800000L; //1000*60*60*24*27;
     private TextView daysAni;
     private TextView hoursAni;
     private TextView minutesAni;
@@ -81,12 +81,12 @@ public class OtherFragment extends android.app.Fragment{
         startMillis = System.currentTimeMillis(); //get the start time in milliseconds
         endMillis = endCalendar.getTimeInMillis(); //get the end time in milliseconds
         totalMillis = (endMillis - startMillis); //total time in milliseconds
-        totalMillisYear = getMissingMilliesAni();
-        totalMillisMonth = getMissingMilliesMens();
+        totalMillisYear = getMissingMillisAni();
+        totalMillisMonth = getMissingMillisMens(totalMillisYear);
 
-        currentDateLbl =(TextView) otherFragmentView.findViewById(R.id.lblDate);
-        picker=(DatePicker)otherFragmentView.findViewById(R.id.dpResult);
-        displayDate=(Button)otherFragmentView.findViewById(R.id.btnChangeDate);
+        currentDateLbl = (TextView) otherFragmentView.findViewById(R.id.lblDate);
+        picker = (DatePicker) otherFragmentView.findViewById(R.id.dpResult);
+        displayDate = (Button) otherFragmentView.findViewById(R.id.btnChangeDate);
 
         picker.updateDate(year, month, day);
         currentDateLbl.setText(getCurrentDate());
@@ -175,8 +175,8 @@ public class OtherFragment extends android.app.Fragment{
                     endMillis = endCalendar.getTimeInMillis();
                     totalMillis = (endMillis - startMillis);
                     chCountdownSince.setBase(endMillis);
-                    totalMillisYear = getMissingMilliesAni();
-                    totalMillisMonth = getMissingMilliesMens();
+                    totalMillisYear = getMissingMillisAni();
+                    totalMillisMonth = getMissingMillisMens(totalMillisYear);
                     cdt.start();
                     cdtm.start();
                     calendarOpen = false;
@@ -203,9 +203,8 @@ public class OtherFragment extends android.app.Fragment{
         return builder.toString();
     }
 
-    public long getMissingMilliesMens(){
+    public long getMissingMillisMens(long totalMillisTemp){
         long endMillisMonth;
-        long totalMillisTemp = totalMillis;
         int monthTemp = month;
         Calendar endCalendarTemp = Calendar.getInstance();
 
@@ -227,7 +226,7 @@ public class OtherFragment extends android.app.Fragment{
         return  totalMillisTemp;
     }
 
-    public long getMissingMilliesAni(){
+    public long getMissingMillisAni(){
         long totalMillisTemp = totalMillis;
         Calendar endCalendarTemp = Calendar.getInstance();
         int yearTemp = year;
